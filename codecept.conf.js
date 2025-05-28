@@ -9,7 +9,7 @@ exports.config = {
       url: 'https://www.aljazeera.com',
       smartWait: 5000,
       browser: "chrome",
-      browserVersion: '137.0.7151.41',
+      browserVersion: 'latest',
       keepBrowserState: true,
       keepCookies: true,
       restart: true,
