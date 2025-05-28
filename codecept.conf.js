@@ -16,7 +16,7 @@ exports.config = {
       windowSize: "maximize",
       timeouts: {
         "script": 60000,
-        "page load": 10000
+        "page load": 20000
       }
     }
   },

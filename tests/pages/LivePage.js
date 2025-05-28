@@ -8,18 +8,18 @@ class LivePage {
 
     // ----------------------------------- Helper Methods -----------------------------------------------------------
 
-    open() {
-        return actor().amOnPage('/live');
+    async open() {
+        await actor().amOnPage('/live');
     }
 
     // ----------------------------------- Assertions ------------------------------------------------------------------
 
-    seePlayer() {
-        return actor().seeElement(this.player);
+    async seePlayer() {
+        await actor().seeElement(this.player);
     }
 
-    seeSwitchPlayerButton() {
-        return actor().seeElement(this.switchPlayerButton);
+    async seeSwitchPlayerButton() {
+        await actor().seeElement(this.switchPlayerButton);
     }
 
 }
