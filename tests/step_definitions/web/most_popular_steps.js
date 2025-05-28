@@ -1,33 +1,25 @@
-const MostPopularPage = require('../pages/MostPopularPage');
+const MostPopularPage = require('../../pages/MostPopularPage');
 
 Given('I am on the homepage', () => {
     return MostPopularPage.open();
 });
 
-When('I scroll to Most Popular', () => {
+When('I scroll to the "Most Popular" section', () => {
     return MostPopularPage.scrollToMostPopular();
 });
 
-Then('I see the Most Popular container', () => {
+Then('I see the "Most Popular" container', () => {
     return MostPopularPage.seeMostPopular();
 });
 
-Then('I see exactly {int} items in Most Popular', (count) => {
+Then('I see exactly {int} items in the "Most Popular" section', (count) => {
     return MostPopularPage.seeItemCount(count);
 });
 
-Given('I set viewport to {int}x{int}', (width, height) => {
-    return MostPopularPage.setViewport(width, height)
-});
-
-Then('I do not see the Most Popular container', () => {
-    return MostPopularPage.dontSeeMostPopular();
-});
-
-When('I activate Skip to Most Read', () => {
+When('I click on the "Skip to Most Read" link in bypass block menu item', () => {
     return MostPopularPage.skipToMostRead();
 });
 
-Then('the URL should contain {string}', (fragment) => {
+Then('The URL contains {string}', (fragment) => {
     return MostPopularPage.seeUrlContains(fragment);
 });

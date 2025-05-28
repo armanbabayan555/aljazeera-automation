@@ -1,18 +1,9 @@
-Feature: Most Popular Section (Web)
+Feature: Most Popular Section (Mobile)
 
   Background:
     Given I am on the homepage
 
-#  @desktop
-#  Scenario: “Most Popular” appears on desktop
-#    When I scroll to Most Popular
-#    Then I see the Most Popular container
-#
-#  @desktop
-#  Scenario: “Most Popular” has 10 posts
-#    Then I see exactly 10 items in Most Popular
-
-  @desktop
-  Scenario: Skip-to-Most-Read link works
-    When I activate Skip to Most Read
-    Then the URL should contain "#most-read-container"
+  @mobile
+  Scenario: "Most Popular" is hidden on mobile
+    Given Viewport is set to 430x932
+    Then The "Most Popular" container is not visible
