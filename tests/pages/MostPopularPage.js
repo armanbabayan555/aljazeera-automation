@@ -1,4 +1,11 @@
-class MostPopularPage {
+const BasePage = require('./base/BasePage');
+const Assertions = require('./base/Assertions');
+
+class MostPopularPage extends BasePage {
+    constructor() {
+        super('/');
+        this.assert = new Assertions();
+    }
 
     // ----------------------------------- Locators ------------------------------------------------------------------
 
@@ -8,60 +15,57 @@ class MostPopularPage {
     skipLink = 'a.bypass-block-link[href="#most-read-container"]';
     acceptAllCookies = '#onetrust-accept-btn-handler';
 
-    // ----------------------------------- Helper Methods -----------------------------------------------------------
-
-    async open() {
-        await actor().amOnPage('/');
-    }
+    // ----------------------------------- Helper Methods --------------------------------------------------------------
 
     async scrollToMostPopular() {
-        await actor().waitForVisible(this.container);
-        await actor().scrollTo(this.container);
+        await this.waitFor(this.container);
+        await this.scrollTo(this.container);
     }
 
     async acceptCookies() {
-        await actor().click(this.acceptAllCookies);
+        await this.click(this.acceptAllCookies);
     }
 
     async scrollToHeader() {
-        await actor().waitForVisible(this.headerContainer);
-        await actor().scrollTo(this.headerContainer);
+        await this.waitFor(this.headerContainer);
+        await this.scrollTo(this.headerContainer);
     }
 
     async setViewport(width, height) {
-        await actor().resizeWindow(width, height);
+        await this.resize(width, height);
     }
 
     // Scrolling to header, moving cursor to it and pressing tab to open bypass menu
     async skipToMostRead() {
         try {
-            await actor().seeElement(this.acceptAllCookies);
+            await this.assert.see(this.acceptAllCookies);
             await this.acceptCookies();
         } catch {
             console.log("'Accept Cookies' pop-up did not appear.")
         }
         await this.scrollToHeader();
-        await actor().moveCursorTo(this.headerContainer)
-        await actor().pressKey('Tab');
-        await actor().click(this.skipLink);
+        // x-offset used to move cursor to the most left position of the element, found by using getBoundingClientRect() on JS path
+        await this.moveCursorTo(this.headerContainer, 1728, 0)
+        await this.pressKey('Tab');
+        await this.click(this.skipLink);
     }
 
     // ----------------------------------- Assertions ------------------------------------------------------------------
 
     async seeMostPopular() {
-        await actor().seeElement(this.container);
+        await this.assert.see(this.container);
     }
 
     async dontSeeMostPopular() {
-        await actor().dontSeeElement(this.items);
+        await this.assert.dontSee(this.items);
     }
 
     async seeItemCount(n) {
-        await actor().seeNumberOfElements(this.items, n);
+        await this.assert.seeCount(this.items, n);
     }
 
     async seeUrlContains(fragment) {
-        await actor().seeInCurrentUrl(fragment);
+        await this.assert.urlContains(fragment);
     }
 }
 

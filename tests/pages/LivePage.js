@@ -1,25 +1,25 @@
-class LivePage {
+const BasePage = require('./base/BasePage');
+const Assertions = require('./base/Assertions');
 
-    // ----------------------------------- Locators ------------------------------------------------------------------
+class LivePage extends BasePage {
+    constructor() {
+        super('/live');
+        this.assert = new Assertions();
+    }
+
+    // ----------------------------------- Locators --------------------------------------------------------------------
 
     player = '.aj-video-player';
     switchPlayerButton = '#liveStreamPlayerHelpButton';
 
-
-    // ----------------------------------- Helper Methods -----------------------------------------------------------
-
-    async open() {
-        await actor().amOnPage('/live');
-    }
-
     // ----------------------------------- Assertions ------------------------------------------------------------------
 
     async seePlayer() {
-        await actor().seeElement(this.player);
+        await this.assert.see(this.player);
     }
 
     async seeSwitchPlayerButton() {
-        await actor().seeElement(this.switchPlayerButton);
+        await this.assert.see(this.switchPlayerButton);
     }
 
 }
