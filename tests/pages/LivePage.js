@@ -2,7 +2,7 @@ class LivePage {
 
     // ----------------------------------- Locators ------------------------------------------------------------------
 
-    player = '#vjs_video_3_html5_api';
+    player = '.aj-video-player';
     switchPlayerButton = '#liveStreamPlayerHelpButton';
 
 

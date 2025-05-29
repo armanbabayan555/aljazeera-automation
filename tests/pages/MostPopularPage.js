@@ -2,7 +2,6 @@ class MostPopularPage {
 
     // ----------------------------------- Locators ------------------------------------------------------------------
 
-
     container = '#most-read-container';
     items = '#most-read-container .trending-articles__list > li';
     headerContainer = '.container--header';
@@ -33,12 +32,7 @@ class MostPopularPage {
         await actor().resizeWindow(width, height);
     }
 
-    async pressTab(times = 3) {
-        for (let i = 0; i < times; i++) {
-            await actor().pressKey('Tab');
-        }
-    }
-
+    // Scrolling to header, moving cursor to it and pressing tab to open bypass menu
     async skipToMostRead() {
         try {
             await actor().seeElement(this.acceptAllCookies);
@@ -46,9 +40,9 @@ class MostPopularPage {
         } catch {
             console.log("'Accept Cookies' pop-up did not appear.")
         }
-        await actor().refreshPage();
         await this.scrollToHeader();
-        await this.pressTab(3);
+        await actor().moveCursorTo(this.headerContainer)
+        await actor().pressKey('Tab');
         await actor().click(this.skipLink);
     }
 
